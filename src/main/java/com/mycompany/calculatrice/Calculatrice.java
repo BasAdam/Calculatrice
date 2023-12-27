@@ -21,16 +21,17 @@ public class Calculatrice extends JFrame {
     // Remove the unused method displayResult(double)
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(null); // Using null layout for simplicity
-
+        setLayout(null); // Utiliser un layout null pour la simplicité
+    
         display = new JTextField("0");
         display.setEditable(false);
-        display.setBounds(10, 10, 280, 50); // Adjust size and position as needed
+        display.setBounds(10, 10, 280, 50); // Ajuster la taille et la position selon les besoins
         add(display);
-
-        // Initialize buttons
+    
+        // Initialisation des boutons
         JButton[] buttons = new JButton[18];
         String[] buttonTexts = {"CE", "%", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"};
+        
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = new JButton(buttonTexts[i]);
             if (i < 2) { // Pour les deux premiers boutons
@@ -39,22 +40,26 @@ public class Calculatrice extends JFrame {
                 buttons[i].setBounds(10 + ((i - 2) % 4) * 70, 70 + ((i - 2) / 4 + 1) * 70, 60, 60);
             }
             add(buttons[i]);
-
-            // Si le bouton est le bouton pour le point
-            if (i == 15) { // Le bouton pour le point est maintenant le 16ème bouton, donc son index est 15
+    
+            // Ajouter un ActionListener pour le bouton "CE" pour réinitialiser la calculatrice
+            if (buttonTexts[i].equals("CE")) {
                 buttons[i].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        // Ajoutez un point au texte actuel dans le display
-                        String currentText = display.getText();
-                        if (!currentText.contains(".")) {
-                            display.setText(currentText + ".");
-                        }
+                        resetCalculator();
                     }
                 });
             }
         }
-        setSize(320, 400);
+        setSize(290, 450);
     }
+    
+    private void resetCalculator() {
+        display.setText("0");
+        result = 0;
+        operator = "=";
+        calculating = true;
+    }
+    
 
 
     private void initializeCalculatorFunctions() {
@@ -155,8 +160,15 @@ public class Calculatrice extends JFrame {
             case "=":
                 result = n;
                 break;
+            case "%":
+                result %= n;
+            break;
         }
+
         displayResult(result);
+
+
+    
 
     // Ajoutez ceci dans votre méthode initComponents
     JButton decimalButton = new JButton(".");
