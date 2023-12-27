@@ -75,6 +75,7 @@ public class Calculatrice extends JFrame {
         getButton("*").addActionListener(command);
         getButton("/").addActionListener(command);
         getButton("=").addActionListener(command);
+        getButton("%").addActionListener(command);
         
     }
 
