@@ -29,11 +29,15 @@ public class Calculatrice extends JFrame {
         add(display);
 
         // Initialize buttons
-        JButton[] buttons = new JButton[18]; // Changez la taille du tableau à 18
+        JButton[] buttons = new JButton[18];
         String[] buttonTexts = {"CE", "%", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"};
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = new JButton(buttonTexts[i]);
-            buttons[i].setBounds(10 + (i % 4) * 70, 70 + (i / 4) * 70, 60, 60);
+            if (i < 2) { // Pour les deux premiers boutons
+                buttons[i].setBounds(10 + i * 70, 70, 60, 60);
+            } else { // Pour les boutons restants
+                buttons[i].setBounds(10 + ((i - 2) % 4) * 70, 70 + ((i - 2) / 4 + 1) * 70, 60, 60);
+            }
             add(buttons[i]);
 
             // Si le bouton est le bouton pour le point
@@ -52,6 +56,7 @@ public class Calculatrice extends JFrame {
         setSize(320, 400);
     }
 
+
     private void initializeCalculatorFunctions() {
         ActionListener insert = new InsertAction();
         ActionListener command = new CommandAction();
@@ -65,6 +70,7 @@ public class Calculatrice extends JFrame {
         getButton("*").addActionListener(command);
         getButton("/").addActionListener(command);
         getButton("=").addActionListener(command);
+        
     }
 
     private JButton getButton(String text) {
