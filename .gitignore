@@ -1,0 +1,26 @@
+# Fichiers IDEA
+.idea/
+
+# Fichiers générés par IDEA
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+
+# Fichiers de configuration de projet
+*.editorconfig
+.ideaCodeStyles/
+.ideaInspections/
+.ideaScopes/
+.ideaVcs.xml
+
+# Fichiers de sauvegarde
+.idea_caches/
+.idea/libraries/
+.idea/dictionaries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/uiDesigner.xml
+
+# Fichiers de compilation
+out/
